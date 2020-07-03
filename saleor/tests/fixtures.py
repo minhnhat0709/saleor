@@ -20,8 +20,6 @@ from django_countries import countries
 from PIL import Image
 from prices import Money, TaxedMoney
 
-from saleor.graphql.channel.tests.fixtures import channel_USD
-
 from ..account.models import Address, StaffNotificationRecipient, User
 from ..app.models import App
 from ..checkout import utils

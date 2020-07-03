@@ -46,8 +46,14 @@ def resolve_digital_contents(info):
     return models.DigitalContent.objects.all()
 
 
-def resolve_product_by_slug(slug):
-    return models.Product.objects.filter(slug=slug).first()
+def resolve_product_by_slug(info, slug):
+    user = info.context.user
+    channel_slug = info.variable_values.get("channelSlug")
+    return (
+        models.Product.objects.visible_to_user(user, channel_slug)
+        .filter(slug=slug)
+        .first()
+    )
 
 
 def resolve_products(info, stock_availability=None, **_kwargs):
